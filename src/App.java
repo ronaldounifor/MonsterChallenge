@@ -1,6 +1,28 @@
+import java.util.Scanner;
+import java.util.List;
+import java.util.ArrayList;
+
 public class App {
     public static void main(String[] args) throws Exception {
-        System.out.println("Hello, World!");
+        readInput();
+    }
+
+    private static void readInput() {
+        Scanner scanner = new Scanner(System.in);
+ 
+        while (scanner.hasNextLine()) {
+            List<String> tokens = new ArrayList<>();
+            Scanner lineScanner = new Scanner(scanner.nextLine());
+ 
+            while (lineScanner.hasNext()) {
+                tokens.add(lineScanner.next());
+            }
+ 
+            lineScanner.close();
+            System.out.println(tokens);
+        }
+ 
+        scanner.close();
     }
 }
 // MH: 100
@@ -29,11 +51,3 @@ public class App {
 // closestHero = h[0];
 // while(!failed) {
 // 	closestHero.hp -= monster.
-
-
-
-
-
-
-}
-
