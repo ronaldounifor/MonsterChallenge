@@ -46,4 +46,12 @@ public class HeroQueue {
         }
     }
 
+    public void takeDamage(){
+
+    }
+
+    public void buff() {
+        
+    }
+
 }
