@@ -8,17 +8,11 @@ public class Scenario implements Cloneable {
     private int special;
     private int buffStrength;
     private int buffCharges;
-  
-    private int tankValue;
-    private int roundDamage;
-  
-    private int currentTank = 0;
-
     private boolean specialAlive;
-
     private State currentState;
-
     private Unit lastHit;
+
+    public Scenario() {}
 
     public Scenario(Unit monster, HeroQueue heroes, int special, int buffStrength, int buffCharges) {
       this.monster = monster;
@@ -28,9 +22,6 @@ public class Scenario implements Cloneable {
       this.buffCharges = buffCharges;
       this.specialAlive = true;
       this.currentState = new Ongoing(this);
-    }
-
-    public Scenario() {
     }
 
     public void nextRound() {
@@ -71,9 +62,18 @@ public class Scenario implements Cloneable {
     }
 
     @Override
-    protected Object clone() throws CloneNotSupportedException {
-        //TODO implementar clone razo
-        return super.clone();
+    protected Scenario clone() throws CloneNotSupportedException {
+        Scenario clone = new Scenario();
+
+        clone.setMonster(monster.clone());
+        clone.setHeroes(heroes.clone());
+        clone.setSpecial(special);
+        clone.setBuffStrength(buffStrength);
+        clone.setBuffCharges(buffCharges);
+        clone.setSpecialAlive(true);
+        clone.setCurrentState(currentState);
+
+        return clone;
     }
 
     public Unit getMonster() {
@@ -114,30 +114,6 @@ public class Scenario implements Cloneable {
 
     public void setBuffCharges(int buffCharges) {
       this.buffCharges = buffCharges;
-    }
-
-    public int getTankValue() {
-      return tankValue;
-    }
-
-    public void setTankValue(int tankValue) {
-      this.tankValue = tankValue;
-    }
-
-    public int getRoundDamage() {
-      return roundDamage;
-    }
-
-    public void setRoundDamage(int roundDamage) {
-      this.roundDamage = roundDamage;
-    }
-
-    public int getCurrentTank() {
-      return currentTank;
-    }
-
-    public void setCurrentTank(int currentTank) {
-      this.currentTank = currentTank;
     }
 
     public boolean isSpecialAlive() {

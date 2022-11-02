@@ -1,16 +1,27 @@
 package model;
 
-public class Unit {
+public class Unit implements Cloneable {
   private int health;
   private int attack;
   private Unit proximo;
   private boolean special;
+
+  public Unit() {}
 
   public Unit(int health, int attack, boolean special) {
     this.health = health;
     this.attack = attack;
     this.special = special;
   }
+
+  @Override
+    protected Unit clone() throws CloneNotSupportedException {
+        Unit clone = new Unit();
+        clone.setAttack(attack);
+        clone.setHealth(health);
+        clone.setSpecial(special);
+        return clone;
+    }
 
   public int getHealth() {
     return this.health;

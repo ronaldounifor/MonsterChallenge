@@ -1,6 +1,6 @@
 package model;
 
-public class HeroQueue {
+public class HeroQueue implements Cloneable {
     private Unit primeiro;
     private int quantidade;
 
@@ -63,6 +63,17 @@ public class HeroQueue {
 
     public void buff() {
         
+    }
+
+    @Override
+    protected HeroQueue clone() throws CloneNotSupportedException {
+        HeroQueue clone = new HeroQueue();
+        for (int i = 0; i < getQuantidade(); i++) {
+            Unit heroiAtual = desenfileirar();
+            clone.enfileirar(heroiAtual.clone());
+            enfileirar(heroiAtual);
+        }
+        return clone;
     }
 
 }
