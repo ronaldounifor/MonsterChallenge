@@ -4,22 +4,35 @@ import model.HeroQueue;
 import model.Scenario;
 import model.Unit;
 
-import java.util.ArrayList;
-
 public class App {
   public static void main(String[] args) throws Exception {
 
-    // ArrayList<Scenario> scenarios = readInput();
+    Scenario cenarioBase = readInput();
 
-    Scenario scenario = readInput();
+    Scenario cenarioAtual = cenarioBase.clone();
 
-    // for (Scenario scenario : scenarios) {
+    //cenario com zero cargas
+    //cenario com uma carga
+      //round 0
+        //buffar heroi 0
+        //buffar heroi 1
+        //...
+        //buffar heroi n (quantos estiverem vivos nesse round)
+      //round 1
+        //mesmo
+      //...
+      //round n (até finalizar)
+        //mesmo
+    //cenario com duas cargas
+      //mesmo
+    //...
+    //cenario com todas as cargas
+      //mesmo
 
-      while (!scenario.isFinished())
-        scenario.nextRound();
+    while (!cenarioAtual.isFinished())
+      cenarioAtual.nextRound();
 
-      System.out.println(scenario.getResult());
-    // }
+    System.out.println(cenarioAtual.getResult());
 
   }
 

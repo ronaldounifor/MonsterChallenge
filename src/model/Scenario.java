@@ -62,7 +62,7 @@ public class Scenario implements Cloneable {
     }
 
     @Override
-    protected Scenario clone() throws CloneNotSupportedException {
+    public Scenario clone() throws CloneNotSupportedException {
         Scenario clone = new Scenario();
 
         clone.setMonster(monster.clone());

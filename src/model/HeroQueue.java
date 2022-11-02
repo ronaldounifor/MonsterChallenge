@@ -66,7 +66,7 @@ public class HeroQueue implements Cloneable {
     }
 
     @Override
-    protected HeroQueue clone() throws CloneNotSupportedException {
+    public HeroQueue clone() throws CloneNotSupportedException {
         HeroQueue clone = new HeroQueue();
         for (int i = 0; i < getQuantidade(); i++) {
             Unit heroiAtual = desenfileirar();

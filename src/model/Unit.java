@@ -15,13 +15,13 @@ public class Unit implements Cloneable {
   }
 
   @Override
-    protected Unit clone() throws CloneNotSupportedException {
-        Unit clone = new Unit();
-        clone.setAttack(attack);
-        clone.setHealth(health);
-        clone.setSpecial(special);
-        return clone;
-    }
+  public Unit clone() throws CloneNotSupportedException {
+    Unit clone = new Unit();
+    clone.setAttack(attack);
+    clone.setHealth(health);
+    clone.setSpecial(special);
+    return clone;
+  }
 
   public int getHealth() {
     return this.health;
