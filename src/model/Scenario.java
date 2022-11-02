@@ -1,4 +1,7 @@
 package model;
+
+import java.util.ArrayList;
+
 import state.Ongoing;
 import state.State;
 
@@ -6,22 +9,20 @@ public class Scenario implements Cloneable {
     private Unit monster;
     private HeroQueue heroes;
     private int special;
-    private int buffStrength;
-    private int buffCharges;
     private boolean specialAlive;
     private State currentState;
     private Unit lastHit;
+    private ArrayList<Integer> buffedHeroes;
 
     public Scenario() {}
 
-    public Scenario(Unit monster, HeroQueue heroes, int special, int buffStrength, int buffCharges) {
+    public Scenario(Unit monster, HeroQueue heroes, int special) {
       this.monster = monster;
       this.heroes = heroes;
       this.special = special;
-      this.buffStrength = buffStrength;
-      this.buffCharges = buffCharges;
       this.specialAlive = true;
       this.currentState = new Ongoing(this);
+      this.buffedHeroes = new ArrayList<>();
     }
 
     public void nextRound() {
@@ -53,6 +54,11 @@ public class Scenario implements Cloneable {
       }
     }
 
+    public void applyBuff(int heroPosition, int buffStrength) {
+      heroes.applyBuff(heroPosition, buffStrength);
+      buffedHeroes.add(heroPosition);
+    }
+
     public boolean isFinished() {
       return currentState.isFinished();
     }
@@ -68,10 +74,9 @@ public class Scenario implements Cloneable {
         clone.setMonster(monster.clone());
         clone.setHeroes(heroes.clone());
         clone.setSpecial(special);
-        clone.setBuffStrength(buffStrength);
-        clone.setBuffCharges(buffCharges);
         clone.setSpecialAlive(true);
-        clone.setCurrentState(currentState);
+        clone.setCurrentState(new Ongoing(clone));
+        clone.setBuffedHeroes(new ArrayList<>());
 
         return clone;
     }
@@ -100,22 +105,6 @@ public class Scenario implements Cloneable {
       this.special = special;
     }
 
-    public int getBuffStrength() {
-      return buffStrength;
-    }
-
-    public void setBuffStrength(int buffStrength) {
-      this.buffStrength = buffStrength;
-    }
-
-    public int getBuffCharges() {
-      return buffCharges;
-    }
-
-    public void setBuffCharges(int buffCharges) {
-      this.buffCharges = buffCharges;
-    }
-
     public boolean isSpecialAlive() {
       return specialAlive;
     }
@@ -138,6 +127,14 @@ public class Scenario implements Cloneable {
 
     public void setLastHit(Unit lastHit) {
       this.lastHit = lastHit;
+    }
+
+    public ArrayList<Integer> getBuffedHeroes() {
+      return buffedHeroes;
+    }
+
+    public void setBuffedHeroes(ArrayList<Integer> buffedHeroes) {
+      this.buffedHeroes = buffedHeroes;
     }
     
 }

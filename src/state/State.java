@@ -3,9 +3,10 @@ package state;
 import model.Scenario;
 
 public abstract class State {
-    protected static final String SUCCESS = "success";
-    protected static final String PENDING = "pending";
-    protected static final String FAILURE = "failure";
+    public static final String SUCCESS = "success";
+    public static final String MEDIOCRE = "mediocre";
+    public static final String PENDING = "pending";
+    public static final String FAILURE = "failure";
 
     protected Scenario scenario;
 

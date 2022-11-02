@@ -18,7 +18,7 @@ public class MonsterRIP extends State {
         if(scenario.getLastHit().isSpecial())
             return SUCCESS;
         else
-            return FAILURE;
+            return MEDIOCRE;
     }
     
     @Override

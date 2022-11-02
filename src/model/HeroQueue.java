@@ -61,8 +61,15 @@ public class HeroQueue implements Cloneable {
         return !especialMorreu;
     }
 
-    public void buff() {
-        
+    public void applyBuff(int heroPosition, int buffStrength) {
+        for (int i = 0; i < getQuantidade(); i++) {
+            Unit heroiAtual = desenfileirar();
+
+            if(i == heroPosition)
+                heroiAtual.setAttack(heroiAtual.getAttack() + buffStrength);
+
+            enfileirar(heroiAtual);
+        }
     }
 
     @Override
@@ -75,5 +82,7 @@ public class HeroQueue implements Cloneable {
         }
         return clone;
     }
+
+    
 
 }
