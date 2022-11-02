@@ -2,6 +2,7 @@ import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Deque;
 import java.util.Scanner;
+import java.util.Stack;
 
 import model.HeroQueue;
 import model.Scenario;
@@ -12,31 +13,6 @@ public class App {
   private static ArrayList<Deque<Integer>> combinacoes = new ArrayList<>();
 
   public static void main(String[] args) throws Exception {
-
-    ArrayList<Scenario> cenarios = readInput();
-
-    boolean deuCerto = false;
-
-    for (Scenario scenario : cenarios) {
-      while (!scenario.isFinished())
-        scenario.nextRound();
-
-      if(scenario.getResult() == State.SUCCESS) {
-        deuCerto = true;
-        System.out.println(scenario.getResult());
-        for (Integer position : scenario.getBuffedHeroes())
-          System.out.print(position + " ");
-
-        break;
-      }
-    }
-
-    if(!deuCerto)
-      System.out.println(State.FAILURE);
-
-  }
-
-  private static ArrayList<Scenario> readInput() throws Exception {
     Scanner scanner = new Scanner(System.in);
     Unit monster = new Unit(scanner.nextInt(), scanner.nextInt(), false);
 
@@ -53,9 +29,10 @@ public class App {
     scanner.close();
 
     Scenario cenarioBase = new Scenario(monster, heroes, special);
-    ArrayList<Scenario> cenarios = new ArrayList<>();
-
+    
     gerarCombinacoes(numberOfHeroes, buffCharges);
+
+    boolean deuCerto = false;
 
     for (Deque<Integer> combinacao : combinacoes) {
       Scenario cenarioAux = cenarioBase.clone();
@@ -63,10 +40,22 @@ public class App {
       for (Integer posicaoHeroi : combinacao)
         cenarioAux.applyBuff(posicaoHeroi, buffStrength);
       
-      cenarios.add(cenarioAux);
+      while (!cenarioAux.isFinished())
+        cenarioAux.nextRound();
+
+      if(cenarioAux.getResult() == State.SUCCESS) {
+        deuCerto = true;
+        System.out.println(cenarioAux.getResult());
+        for (Integer position : cenarioAux.getBuffedHeroes())
+          System.out.print(position + " ");
+
+        break;
+      }
     }
 
-    return cenarios;
+    if(!deuCerto)
+      System.out.println(State.FAILURE);
+
   }
 
   private static void gerarCombinacoes(int n, int r) {
