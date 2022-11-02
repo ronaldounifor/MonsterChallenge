@@ -1,3 +1,5 @@
+package model;
+
 public class HeroQueue {
     private Unit primeiro;
     private int quantidade;
@@ -46,8 +48,17 @@ public class HeroQueue {
         }
     }
 
-    public void takeDamage(){
+    public boolean takeDamage(int damage){
+        boolean especialMorreu = false;
+        primeiro.setHealth(primeiro.getHealth() - damage);
 
+        if(primeiro.getHealth() <= 0) {
+            if(primeiro.isSpecial())
+                especialMorreu = true;
+
+            desenfileirar();
+        }
+        return !especialMorreu;
     }
 
     public void buff() {

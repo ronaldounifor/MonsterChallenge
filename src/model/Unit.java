@@ -1,11 +1,15 @@
+package model;
+
 public class Unit {
   private int health;
   private int attack;
   private Unit proximo;
+  private boolean special;
 
-  public Unit(int health, int attack) {
+  public Unit(int health, int attack, boolean special) {
     this.health = health;
     this.attack = attack;
+    this.special = special;
   }
 
   public int getHealth() {
@@ -30,6 +34,14 @@ public class Unit {
 
   public void setProximo(Unit proximo) {
     this.proximo = proximo;
+  }
+
+  public boolean isSpecial() {
+    return special;
+  }
+
+  public void setSpecial(boolean special) {
+    this.special = special;
   }
 
 }
